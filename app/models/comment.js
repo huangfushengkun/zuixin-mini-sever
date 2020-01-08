@@ -1,5 +1,6 @@
 const { sequelize } = require('./../../core/db')
 const { Model, Sequelize } = require('sequelize')
+const { Art } = require('./art')
 
 
 class Comment extends Model {
@@ -7,10 +8,6 @@ class Comment extends Model {
     static async addComment (user_id,nickname,art_id,type, content) {
         const comment = await Comment.findOne({
             where: {
-                // user_id,
-                // nickname,
-                // art_id,
-                // type,
                 content
             }
         })
@@ -41,6 +38,22 @@ class Comment extends Model {
             }
         })
         return comments
+    }
+
+    static async getMyCommentList(user_id) {
+        const myCommentlist = await Comment.findAll({
+            // order:[
+            //     ['id','DESC']  // index 字段排序  DESC 倒序
+            // ],
+            where: {
+                user_id
+            }
+        })
+        if(!myCommentlist) {
+            throw new global.errs.NotFound()
+        }
+        return await Art.getList(myCommentlist)
+        // return myCommentlist
     }
 
 }

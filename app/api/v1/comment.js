@@ -24,6 +24,11 @@ router.post('/add', new Auth().m, async (ctx, next) => {
 })
 
 
+router.get('/mycoments/', new Auth().m, async (ctx,next) => {
+    const myCommentList = await Comment.getMyCommentList(ctx.auth.uid)
+    ctx.body = myCommentList
+})
+
 router.get('/get/:id/:type', new Auth().m, async (ctx, next) => {
     const id = ctx.params.id
     const type = ctx.params.type
