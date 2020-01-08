@@ -30,7 +30,8 @@ router.post('/register', async (ctx) => {
 router.post('/update/nickname', new Auth().m, async (ctx) => {
     console.log(ctx)
     const nickname = ctx.request.body.nickname
-    const data = await User.updateUserInfo(ctx.auth.uid,nickname)
+    const avatarUrl = ctx.request.body.avatarUrl
+    const data = await User.updateUserInfo(ctx.auth.uid,nickname,avatarUrl)
     ctx.body = data
 })
 

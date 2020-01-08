@@ -49,8 +49,8 @@ class User extends Model {
         })
     }
     
-    static async updateUserInfo (id,nickname) {
-        return await User.update({nickname},{
+    static async updateUserInfo (id,nickname,avatarUrl) {
+        return await User.update({nickname,avatarUrl},{
             where:{id}
         })
     }
@@ -64,6 +64,7 @@ User.init({
         autoIncrement:true
     },
     nickname: Sequelize.STRING,
+    avatarUrl: Sequelize.STRING,
     email: {
         type:Sequelize.STRING(128),
         unique:true
