@@ -3,6 +3,9 @@ const Router = require('koa-router')
 
 const { RegisterValidator } = require('./../../validators/validator')
 const { User } = require('./../../models/user')  // 导入user
+
+const { Auth } = require('./../../../middlewares/auth')
+
 const router = new Router({
     prefix:'/v1/user'  //v1前记得加  ’/‘
 })
@@ -22,6 +25,13 @@ router.post('/register', async (ctx) => {
 
     const r = await User.create(user)  //3.保存数据 并返回User模型 
     throw new global.errs.Success()
+})
+
+router.post('/update/nickname', new Auth().m, async (ctx) => {
+    console.log(ctx)
+    const nickname = ctx.request.body.nickname
+    const data = await User.updateUserInfo(ctx.auth.uid,nickname)
+    ctx.body = data
 })
 
 module.exports = router

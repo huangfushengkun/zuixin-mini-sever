@@ -48,6 +48,12 @@ class User extends Model {
             authority:8
         })
     }
+    
+    static async updateUserInfo (id,nickname) {
+        return await User.update({nickname},{
+            where:{id}
+        })
+    }
 
 }
 

@@ -71,6 +71,15 @@ class DislikeError extends HttpException {
     }
 }
 
+class UpdateError extends HttpException {
+    constructor (msg,errorCode) {
+        super()
+        this.code = 400,
+        this.msg = msg || '昵称更新失败！',
+        this.errorCode = errorCode || 15001
+    }
+}
+
 
 module.exports = {
     HttpException,
@@ -80,5 +89,6 @@ module.exports = {
     AuthFailed,
     Forbbiden,
     LikeError,
-    DislikeError
+    DislikeError,
+    UpdateError
 }
