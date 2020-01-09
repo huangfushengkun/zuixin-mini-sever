@@ -1,6 +1,6 @@
-const Swquelize = require('sequelize')
+const Sequelize = require('sequelize')
 const { dbname, host, port, user, password } = require('./../config/config').database
-const sequelize = new Swquelize(dbname,user,password,{
+const sequelize = new Sequelize(dbname,user,password,{
     dialect:'mysql',  // 安装驱动 mysql2 
     host,
     port,
