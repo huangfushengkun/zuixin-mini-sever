@@ -5,7 +5,7 @@ const { Art } = require('./art')
 
 class Comment extends Model {
 
-    static async addComment (user_id,nickname,art_id,type, content) {
+    static async addComment (user_id,nickname,art_id,type, content,avatar_url) {
         const comment = await Comment.findOne({
             where: {
                 content
@@ -15,6 +15,7 @@ class Comment extends Model {
             return await Comment.create({
                 user_id,
                 nickname,
+                avatar_url,
                 art_id,
                 type,
                 content
@@ -73,6 +74,7 @@ Comment.init({
     user_id:Sequelize.INTEGER,
     type:Sequelize.INTEGER,
     nickname: Sequelize.STRING,
+    avatar_url: Sequelize.STRING,
 },{
     sequelize,
     tableName: 'comment'

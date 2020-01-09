@@ -18,8 +18,8 @@ router.post('/add', new Auth().m, async (ctx, next) => {
     const user_id = ctx.auth.uid
     const user = await User.getUserByUserId(user_id)
     let nickname = user.nickname 
-
-    await Comment.addComment(user_id,nickname,art_id,type,content)
+    let avatar_url = user.avatarUrl 
+    await Comment.addComment(user_id,nickname,art_id,type,content,avatar_url)
     throw new global.errs.Success()
 })
 
